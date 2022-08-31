@@ -14,7 +14,7 @@ namespace UNIV
         public static BigInteger CurrentIndex(string university)
         {
             var curIndex = IndexMap.Get(university);
-            if (curIndex == null) throw new Exception("The argument \"university\" is invalid");
+            if (curIndex == null) throw new Exception("The argument \"university\" is invalid.");
             return (BigInteger)curIndex;
         }
 
