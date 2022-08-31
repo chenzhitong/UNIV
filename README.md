@@ -16,9 +16,9 @@
 * 学生现场下载OneGate进入到指定的页面（开发中）
 
   调用方法
-  `mintUniv(string university) `
+  `mintUniv(UInt160 owner, string university) `
 
-  合约会自动创建一个NFT，发送给合约调用者，编号递增（1~100)
+  合约会自动创建一个NFT，发送填写的owner，编号递增（1~100)
 
 * 查询每所学校NFT领取数量
 
@@ -39,6 +39,10 @@
 > mintUniv 时报错 The argument "university" is invalid.
 
 用户填写了一个不存在的大学，可能是随便写的，也可能是在管理员进行初始化之前mintUniv
+
+> mintUniv 时报错 UInt160 is invalid.
+
+用户填写错误的owner
 
 > mintUniv 时报错 The school's NFTs have all been claimed.
 
