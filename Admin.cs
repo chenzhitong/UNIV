@@ -4,9 +4,9 @@ using Neo.SmartContract.Framework.Native;
 using Neo.SmartContract.Framework.Services;
 using System;
 
-namespace university
+namespace UNIV
 {
-    public partial class University
+    public partial class UNIV
     {
         private static readonly StorageMap OwnerMap = new(Storage.CurrentContext, 0x16);
 
@@ -17,16 +17,17 @@ namespace university
         public static UInt160 SetOwner(UInt160 newOwner)
         {
             if (!IsOwner()) throw new Exception("No authorization.");
-            if (!newOwner.IsValid) throw new Exception("Neoverse::SetOwner: UInt160 is invalid.");
+            if (!newOwner.IsValid) throw new Exception("SetOwner: UInt160 is invalid.");
 
             OwnerMap.Put("owner", newOwner);
             return GetOwner();
         }
 
+        public static void CreateType(string university) => IndexStorage.Initial(university);
+
         public static void _deploy(object _, bool update)
         {
             if (update) return;
-            IndexStorage.Initial();
         }
 
         public static void Update(ByteString nefFile, string manifest)

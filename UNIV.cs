@@ -8,12 +8,12 @@ using System;
 using System.ComponentModel;
 using System.Numerics;
 
-namespace university
+namespace UNIV
 {
-    [DisplayName("NFT-University")]
+    [DisplayName("UNIV")]
     [SupportedStandards("NEP-11")]
     [ContractPermission("*", "onNEP11Payment")]
-    public partial class University : Nep11Token<TokenState>
+    public partial class UNIV : Nep11Token<TokenState>
     {
         [InitialValue("NSuyiLqEfEQZsLJawCbmXW154StRUwdWoM", ContractParameterType.Hash160)]
         static readonly UInt160 Owner = default;
@@ -41,31 +41,15 @@ namespace university
             return map;
         }
 
-        public void MintUniv(string secritCode)
+        public static void MintUniv(string university)
         {
-            string university;
-            BigInteger number = 0;
-            byte type = 0;
-            switch (secritCode)
-            {
-                case "AAFwefe":
-                    university = "university A";
-                    number = IndexStorage.NextIndex(0);
-                    break;
-                case "BBFwfefe":
-                    university = "university B";
-                    number = IndexStorage.NextIndex(1);
-                    break;
-                //TODO
-                default: throw new Exception("Incorrect secrit code");
-            }
-            if (IndexStorage.CurrentIndex(type) > 99)
+            if (IndexStorage.CurrentIndex(university) > IndexStorage.MaxIndex)
                 throw new Exception("The school's NFTs have all been claimed");
-            var token = new TokenState(university, number);
+            var token = new TokenState(university, IndexStorage.NextIndex(university));
             Mint(token.Name, token);
         }
 
         [Safe]
-        public static BigInteger TotalMint(byte type) => IndexStorage.CurrentIndex(type);
+        public static BigInteger TotalMint(string university) => IndexStorage.CurrentIndex(university);
     }
 }
