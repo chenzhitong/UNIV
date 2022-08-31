@@ -23,7 +23,7 @@ namespace UNIV
             return GetOwner();
         }
 
-        public static void CreateType(string university) => IndexStorage.Initial(university);
+        public static void Initialize(string university) => IndexStorage.Initial(university);
 
         public static void _deploy(object _, bool update)
         {

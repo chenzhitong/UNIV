@@ -43,7 +43,7 @@ namespace UNIV
 
         public static void MintUniv(string university)
         {
-            if (IndexStorage.CurrentIndex(university) > IndexStorage.MaxIndex)
+            if (IndexStorage.CurrentIndex(university) >= IndexStorage.MaxIndex)
                 throw new Exception("The school's NFTs have all been claimed");
             var token = new TokenState(university, IndexStorage.NextIndex(university));
             Mint(token.Name, token);

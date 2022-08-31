@@ -7,7 +7,7 @@ namespace UNIV
     internal class IndexStorage
     {
         private static readonly StorageMap IndexMap = new(Storage.CurrentContext, 0x14);
-        public static readonly int MaxIndex = 99;
+        public static readonly int MaxIndex = 100;
 
         public static void Initial(string university) => IndexMap.Put(university, 0);
 
