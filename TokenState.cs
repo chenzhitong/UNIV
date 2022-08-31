@@ -1,4 +1,5 @@
-﻿using Neo.SmartContract.Framework;
+﻿using Neo;
+using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services;
 using System;
 using System.Numerics;
@@ -11,9 +12,9 @@ namespace UNIV
         public BigInteger Number;
         public string Image;
 
-        public TokenState(string university, BigInteger number)
+        public TokenState(UInt160 owner, string university, BigInteger number)
         {
-            Owner = ((Transaction)Runtime.ScriptContainer).Sender;
+            Owner = owner;
             Name = university + " #" + number;
             Number = number;
             Image = "https://neo.org/" + Name + ".png";

@@ -41,11 +41,12 @@ namespace UNIV
             return map;
         }
 
-        public static void MintUniv(string university)
+        public static void MintUniv(UInt160 owner, string university)
         {
+            if (!owner.IsValid) throw new Exception("UInt160 is invalid.");
             if (IndexStorage.CurrentIndex(university) >= IndexStorage.MaxIndex)
                 throw new Exception("The school's NFTs have all been claimed.");
-            var token = new TokenState(university, IndexStorage.NextIndex(university));
+            var token = new TokenState(owner, university, IndexStorage.NextIndex(university));
             Mint(token.Name, token);
         }
 
