@@ -46,6 +46,8 @@ namespace UNIV
             if (!owner.IsValid) throw new Exception("UInt160 is invalid.");
             if (IndexStorage.CurrentIndex(university) >= IndexStorage.MaxIndex)
                 throw new Exception("The school's NFTs have all been claimed.");
+            if (TokensOf(owner).Next())
+                throw new Exception("One address can only claim one NFT");
             var token = new TokenState(owner, university, IndexStorage.NextIndex(university));
             Mint(token.Name, token);
         }
